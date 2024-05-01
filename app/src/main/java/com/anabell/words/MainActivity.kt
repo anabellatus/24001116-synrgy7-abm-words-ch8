@@ -1,20 +1,31 @@
 package com.anabell.words
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.anabell.words.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val activityMainBinding: ActivityMainBinding by lazy{
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        setContentView(activityMainBinding.root)
+
+        setUpNavigationWithAppBar()
+    }
+
+    private fun setUpNavigationWithAppBar(){
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.navigation_container) as NavHostFragment? ?: return
+        setupActionBarWithNavController(host.navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.navigation_container) as NavHostFragment
+        return host.navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

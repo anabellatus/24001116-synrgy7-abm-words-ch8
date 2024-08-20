@@ -1,4 +1,4 @@
-package com.anabell.words.categorygadgetrecyclerview
+package com.anabell.words.ui.categorygadgetrecyclerview
 
 
 interface CategoryAdapterListener {

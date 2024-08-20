@@ -1,4 +1,4 @@
-package com.anabell.words.gadgetrecycler
+package com.anabell.words.ui.gadgetrecycler
 
 data class Gadget(
 
@@ -7,4 +7,4 @@ data class Gadget(
     val category: String,
     val price: Int,
 
-)
+    )

@@ -1,12 +1,12 @@
-package com.anabell.words.gadgetrecycler
+package com.anabell.words.ui.gadgetrecycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.anabell.words.databinding.ItemGadgetBinding
 
-class GadgetAdapter( private val gadgetAdapterListener: GadgetAdapterListener )
-    : ListAdapter<Gadget, GadgetViewHolder>(GadgetDiffUtil()) {
+class GadgetAdapter(private val gadgetAdapterListener: GadgetAdapterListener) :
+    ListAdapter<Gadget, GadgetViewHolder>(GadgetDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GadgetViewHolder {
         return GadgetViewHolder(

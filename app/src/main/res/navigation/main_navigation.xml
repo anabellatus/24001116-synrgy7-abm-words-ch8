@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.anabell.words.fragment.ListFragment"
+        android:name="com.anabell.words.ui.fragment.ListFragment"
         android:label="Gadgets"
         tools:layout="@layout/fragment_list" >
         <action
@@ -16,9 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.anabell.words.fragment.DetailFragment"
+        android:name="com.anabell.words.ui.fragment.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
         <argument
             android:name="name"
             app:argType="string"
@@ -31,5 +34,11 @@
             android:name="price"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.anabell.words.ui.fragment.ProfileFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_profile" >
     </fragment>
 </navigation>

@@ -1,12 +1,12 @@
-package com.anabell.words.categorygadgetrecyclerview
+package com.anabell.words.ui.categorygadgetrecyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.anabell.words.databinding.ItemGadgetCategoryBinding
 
-class CategoryAdapter(private val categoryAdapterListener: CategoryAdapterListener)
-    : ListAdapter<CategoryGadget, CategoryViewHolder>(CategoryDiffUtil())  {
+class CategoryAdapter(private val categoryAdapterListener: CategoryAdapterListener) :
+    ListAdapter<CategoryGadget, CategoryViewHolder>(CategoryDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(
@@ -15,7 +15,7 @@ class CategoryAdapter(private val categoryAdapterListener: CategoryAdapterListen
                 parent,
                 false
             ),
-            categoryAdapterListener =  categoryAdapterListener
+            categoryAdapterListener = categoryAdapterListener
         )
     }
 

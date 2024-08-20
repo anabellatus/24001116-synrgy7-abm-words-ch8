@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">Words</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="product_image">product image</string>
+
+    <string name="email">Email</string>
+    <string name="name">Nama</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="email_error">Email tidak boleh kosong!</string>
+    <string name="name_error">Nama tidak boleh kosong!</string>
+    <string name="password_error">Password tidak boleh kosong!</string>
+    <string name="invalid_password">Password harus > 8 karakter</string>
+    <string name="unmatch_password">Password tidak sama</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="name_value">Binarian</string>
+    <string name="email_value">binarian@example.com</string>
+    <string name="logout">Logout</string>
 </resources>

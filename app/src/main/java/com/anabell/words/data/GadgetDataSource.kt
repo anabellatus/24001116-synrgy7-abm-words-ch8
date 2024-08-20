@@ -1,68 +1,11 @@
-package com.anabell.words.fragment
+package com.anabell.words.data
 
-import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
-import com.anabell.words.databinding.FragmentDetailBinding
-import com.anabell.words.gadgetrecycler.Gadget
-import com.anabell.words.gadgetrecycler.GadgetAdapter
-import com.anabell.words.gadgetrecycler.GadgetAdapterListener
+import com.anabell.words.domain.GadgetRepository
+import com.anabell.words.ui.gadgetrecycler.Gadget
 
-class DetailFragment : Fragment(), GadgetAdapterListener {
+class GadgetDataSource : GadgetRepository {
 
-    private lateinit var viewBinding: FragmentDetailBinding
-    private val gadgetAdapter by lazy { GadgetAdapter(this) }
-
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View {
-        return FragmentDetailBinding.inflate(inflater, container, false).also {
-            viewBinding = it
-        }.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewBinding.recyclerGadget.layoutManager = GridLayoutManager( view.context, 2 )
-        viewBinding.recyclerGadget.adapter = gadgetAdapter
-
-        viewBinding.recyclerGadget.itemAnimator = DefaultItemAnimator()
-        gadgetAdapter.submitList(filterGadgetByCategory(getCategoryName()))
-
-        viewBinding.swipeRefresh.setOnRefreshListener{
-            gadgetAdapter.submitList(filterGadgetByCategory(getCategoryName()))
-            viewBinding.swipeRefresh.isRefreshing = false
-        }
-    }
-
-    private fun filterGadgetByCategory(categoryName: String): List<Gadget>{
-        return retrieveGadgetData().filter { it.category == categoryName }
-    }
-
-    private fun getCategoryName(): String{
-        return getArgs().name
-    }
-
-    private fun getArgs(): DetailFragmentArgs{
-        return DetailFragmentArgs.fromBundle(arguments as Bundle)
-    }
-
-    private fun handleNavigateToGoogle(name: String){
-        val urlIntent = Intent(Intent.ACTION_VIEW)
-        urlIntent.data = Uri.parse("https://www.google.com/search?q=$name")
-        startActivity(urlIntent)
-    }
-
-    override fun onClickGadget(data: Gadget) {
-        handleNavigateToGoogle(data.name)
-    }
-
-    private fun retrieveGadgetData(): List<Gadget>{
+    override fun fetchData(): List<Gadget> {
         return listOf(
             Gadget(
                 image = "https://images.samsung.com/is/image/samsung/assets/id/2401/home/HOME_Q5_Merchandising_160x160_pc.png?\$160_160_PNG\$",
@@ -282,5 +225,4 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
             ),
         )
     }
-
 }

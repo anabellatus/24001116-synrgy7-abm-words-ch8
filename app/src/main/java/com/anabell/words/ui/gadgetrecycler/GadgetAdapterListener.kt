@@ -1,4 +1,4 @@
-package com.anabell.words.gadgetrecycler
+package com.anabell.words.ui.gadgetrecycler
 
 interface GadgetAdapterListener {
 

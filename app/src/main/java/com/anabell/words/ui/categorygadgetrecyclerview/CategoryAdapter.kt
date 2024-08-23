@@ -3,6 +3,7 @@ package com.anabell.words.ui.categorygadgetrecyclerview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.databinding.ItemGadgetCategoryBinding
 
 class CategoryAdapter(private val categoryAdapterListener: CategoryAdapterListener) :

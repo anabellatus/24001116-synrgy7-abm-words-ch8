@@ -19,4 +19,7 @@
     <string name="name_value">Binarian</string>
     <string name="email_value">binarian@example.com</string>
     <string name="logout">Logout</string>
+    <string name="don_t_have_an_account">don\'t have an account?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

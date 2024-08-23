@@ -1,4 +1,4 @@
-package com.anabell.words.ui
+package com.anabell.words.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.anabell.words.R
 import com.anabell.words.databinding.ActivityLoginBinding
+import com.anabell.words.ui.MainActivity
+import com.anabell.words.ui.auth.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -60,6 +62,10 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.error.observe(this) { throwable ->
             Toast.makeText(this, throwable.message, Toast.LENGTH_SHORT).show()
+        }
+
+        activityLoginBinding.registerButton.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }

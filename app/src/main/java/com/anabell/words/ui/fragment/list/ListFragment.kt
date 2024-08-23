@@ -1,7 +1,6 @@
-package com.anabell.words.ui.fragment
+package com.anabell.words.ui.fragment.list
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,9 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapter
 import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapterListener
-import com.anabell.words.ui.categorygadgetrecyclerview.CategoryGadget
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.databinding.FragmentListBinding
-import com.anabell.words.ui.MainActivity
 
 
 class ListFragment : Fragment(), CategoryAdapterListener {
@@ -25,7 +23,7 @@ class ListFragment : Fragment(), CategoryAdapterListener {
     private val categoryAdapter by lazy { CategoryAdapter(this) }
 
     private val viewModel: ListViewModel by viewModels<ListViewModel>() {
-        ListViewModel.provideFactory(this, requireContext())
+        ListViewModel.provideFactory(this, requireActivity().applicationContext)
     }
 
     override fun onCreateView(
@@ -50,7 +48,8 @@ class ListFragment : Fragment(), CategoryAdapterListener {
     }
 
     private fun goToDetailFragment(data: CategoryGadget) {
-        val actionToFragmentDetail = ListFragmentDirections.actionListFragmentToDetailFragment()
+        val actionToFragmentDetail =
+            ListFragmentDirections.actionListFragmentToDetailFragment()
         actionToFragmentDetail.name = data.name
         findNavController().navigate(actionToFragmentDetail)
     }

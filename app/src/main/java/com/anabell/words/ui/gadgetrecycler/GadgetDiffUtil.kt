@@ -1,6 +1,7 @@
 package com.anabell.words.ui.gadgetrecycler
 
 import androidx.recyclerview.widget.DiffUtil
+import com.anabell.words.data.model.Gadget
 
 class GadgetDiffUtil : DiffUtil.ItemCallback<Gadget>() {
 

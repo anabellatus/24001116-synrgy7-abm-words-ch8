@@ -1,19 +1,20 @@
-package com.anabell.words.ui.gadgetrecycler
+package com.anabell.words.ui.auth.login
 
 import android.content.Context
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.anabell.words.data.AuthRepositoryImpl
+import com.anabell.words.domain.AuthRepository
+import com.anabell.words.data.repository.AuthRepositoryImpl
 import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.SharedPreferencesFactory
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
-import com.anabell.words.domain.AuthRepository
 
-class RegisterViewModel(
+
+class LoginViewModel(
     private val authRepository: AuthRepository,
 ) : ViewModel() {
 
@@ -37,7 +38,7 @@ class RegisterViewModel(
                         ),
                         authRemoteDataSource = AuthRemoteDataSourceImpl(),
                     )
-                    return RegisterViewModel(
+                    return LoginViewModel(
                         authRepository = authRepository
                     ) as T
                 }
@@ -53,16 +54,19 @@ class RegisterViewModel(
     private val _error = MutableLiveData<Throwable>()
     val error: LiveData<Throwable> = _error
 
-    fun register(name: String, email: String, password: String) {
+    fun login(email: String, password: String) {
         try {
             _loading.value = true
-            val token = authRepository.register(name, email, password)
+            val token = authRepository.login(email, password)
             authRepository.saveToken(token)
+            authRepository.saveUserEmail(email)
             _loading.value = false
             _success.value = true
         } catch (throwable: Throwable) {
             _loading.value = false
             _error.value = throwable
         }
+
     }
+
 }

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/light_grey"
     android:padding="16dp"
-    tools:context=".ui.fragment.ListFragment">
+    tools:context=".ui.fragment.list.ListFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"

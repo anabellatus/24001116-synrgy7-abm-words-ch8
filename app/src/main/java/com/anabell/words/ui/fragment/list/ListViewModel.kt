@@ -1,4 +1,4 @@
-package com.anabell.words.ui.fragment
+package com.anabell.words.ui.fragment.list
 
 import android.content.Context
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -7,12 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.anabell.words.data.AuthRepositoryImpl
+import com.anabell.words.data.repository.AuthRepositoryImpl
 import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.SharedPreferencesFactory
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.anabell.words.domain.AuthRepository
-import com.anabell.words.ui.categorygadgetrecyclerview.CategoryGadget
+import com.anabell.words.data.model.CategoryGadget
 
 class ListViewModel(
     private val authRepository: AuthRepository,

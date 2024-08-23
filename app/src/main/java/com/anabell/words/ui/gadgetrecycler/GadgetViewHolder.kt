@@ -1,7 +1,10 @@
 package com.anabell.words.ui.gadgetrecycler
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.anabell.words.R
+import com.anabell.words.data.model.Gadget
 import com.anabell.words.databinding.ItemGadgetBinding
 
 class GadgetViewHolder(
@@ -16,6 +19,26 @@ class GadgetViewHolder(
         itemViewBinding.root.setOnClickListener {
             gadgetAdapterListener.onClickGadget(data)
         }
+
+//        val isFavorite = data.isFavorite
+//
+//        if (isFavorite) {
+//            itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
+//        } else {
+//            itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
+//        }
+//
+//        itemViewBinding.favoriteButton.setOnClickListener {
+//            if (isFavorite) {
+//                Log.d("GadgetViewHolder", "Remove from favorite")
+//                gadgetAdapterListener.onRemoveFromFavorite(data)
+//                itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
+//            } else {
+//                gadgetAdapterListener.onAddToFavorite(data)
+//                itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
+//            }
+//        }
+
     }
 
 }

@@ -1,18 +1,21 @@
-package com.anabell.words.ui.fragment
+package com.anabell.words.ui.fragment.detail
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.anabell.words.databinding.FragmentDetailBinding
-import com.anabell.words.ui.gadgetrecycler.Gadget
+import com.anabell.words.data.model.Gadget
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapter
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapterListener
 
@@ -22,7 +25,7 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
     private val gadgetAdapter by lazy { GadgetAdapter(this) }
 
     private val viewModel: DetailViewModel by viewModels<DetailViewModel> {
-        DetailViewModel.Factory
+        DetailViewModel.provideFactory(this, requireContext())
     }
 
     override fun onCreateView(
@@ -38,6 +41,10 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        viewModel.error.observe(viewLifecycleOwner) { error ->
+//            Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
+//        }
+
         setupRecyclerView(view.context)
         refreshData()
 
@@ -46,6 +53,10 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
         viewBinding.swipeRefresh.setOnRefreshListener {
             refreshData()
         }
+
+//        viewBinding.profileButton.setOnClickListener {
+//            goToProfileFragment()
+//        }
     }
 
     private fun setupRecyclerView(context: Context) {
@@ -62,14 +73,21 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
 
     private fun refreshData() {
         viewModel.retrieveGadgetData()
+//        viewModel.loadGadgetsFromFavorite()
     }
 
     private fun getCategoryName(): String {
         return getArgs().name
     }
 
-    private fun getArgs(): com.anabell.words.ui.fragment.DetailFragmentArgs {
-        return com.anabell.words.ui.fragment.DetailFragmentArgs.fromBundle(arguments as Bundle)
+    private fun goToProfileFragment() {
+//        val actionToFragmentProfile =
+//            DetailFragmentDirections.actionDetailFragmentToProfileFragment()
+//        findNavController().navigate(actionToFragmentProfile)
+    }
+
+    private fun getArgs(): DetailFragmentArgs {
+        return DetailFragmentArgs.fromBundle(arguments as Bundle)
     }
 
     private fun handleNavigateToGoogle(name: String) {
@@ -78,7 +96,41 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
         startActivity(urlIntent)
     }
 
-    override fun onClickGadget(data: Gadget) {
-        handleNavigateToGoogle(data.name)
+    private fun handleNavigateToDetailGadget(data: Gadget) {
+        val actionToFragmentDetailGadget =
+            DetailFragmentDirections.actionDetailFragmentToDetailGadgetFragment()
+        actionToFragmentDetailGadget.name = data.name
+        actionToFragmentDetailGadget.image = data.image
+        actionToFragmentDetailGadget.price = data.price
+        actionToFragmentDetailGadget.id = data.id
+        actionToFragmentDetailGadget.category = data.category
+        findNavController().navigate(actionToFragmentDetailGadget)
     }
+
+    override fun onClickGadget(data: Gadget) {
+        handleNavigateToDetailGadget(data)
+//        handleNavigateToGoogle(data.name)
+    }
+
+//    override fun onAddToFavorite(data: Gadget) {
+//        viewModel.addGadgetToFavorites(
+//            data.image,
+//            data.name,
+//            data.category,
+//            data.price,
+//            data.id
+//        )
+//        data.isFavorite = true
+//        Toast.makeText(context, "${data.name} ditambahkan ke favorites", Toast.LENGTH_SHORT).show()
+//        refreshData()
+//    }
+//
+//    override fun onRemoveFromFavorite(data: Gadget) {
+//        Log.d("DetailFragment", "onRemoveFromFavorite: $data")
+//        viewModel.removeGadgetFromFavorites(data)
+//        data.isFavorite = false
+//        Toast.makeText(context, "${data.name} dihapus dari favorites", Toast.LENGTH_SHORT).show()
+//        refreshData()
+//    }
+
 }

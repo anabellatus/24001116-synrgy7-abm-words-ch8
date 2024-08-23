@@ -1,4 +1,4 @@
-package com.anabell.words.ui.categorygadgetrecyclerview
+package com.anabell.words.data.model
 
 data class CategoryGadget(
 

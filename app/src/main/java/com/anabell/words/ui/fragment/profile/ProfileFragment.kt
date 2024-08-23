@@ -1,4 +1,4 @@
-package com.anabell.words.ui.fragment
+package com.anabell.words.ui.fragment.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.anabell.words.databinding.FragmentProfileBinding
-import com.anabell.words.ui.MainActivity
-import kotlin.math.log
-
+import com.anabell.words.ui.auth.AuthCheckerActivity
 class ProfileFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentProfileBinding
@@ -35,11 +33,19 @@ class ProfileFragment : Fragment() {
             logout()
         }
 
+        viewModel.getProfileData()
+        viewModel.userName.observe(viewLifecycleOwner) { userName ->
+            viewBinding.tvName.text = userName
+        }
+        viewModel.userEmail.observe(viewLifecycleOwner) { userEmail ->
+            viewBinding.tvEmail.text = userEmail
+        }
+
     }
 
     private fun logout() {
         viewModel.logout()
-        val intent = Intent(requireActivity(), MainActivity::class.java)
+        val intent = Intent(requireActivity(), AuthCheckerActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

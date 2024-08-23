@@ -3,6 +3,7 @@ package com.anabell.words.ui.gadgetrecycler
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import com.anabell.words.data.model.Gadget
 import com.anabell.words.databinding.ItemGadgetBinding
 
 class GadgetAdapter(private val gadgetAdapterListener: GadgetAdapterListener) :

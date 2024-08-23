@@ -2,6 +2,7 @@ package com.anabell.words.ui.categorygadgetrecyclerview
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.databinding.ItemGadgetCategoryBinding
 
 class CategoryViewHolder(

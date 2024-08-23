@@ -1,4 +1,4 @@
-package com.anabell.words.ui
+package com.anabell.words.ui.auth.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.anabell.words.R
 import com.anabell.words.databinding.ActivityRegisterBinding
-import com.anabell.words.ui.gadgetrecycler.RegisterViewModel
+import com.anabell.words.ui.MainActivity
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -23,6 +23,10 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
+
+        viewBinding.backButton.setOnClickListener {
+            finish()
+        }
 
         viewBinding.registerButton.setOnClickListener {
             if (viewBinding.tieName.text.isNullOrEmpty()) {

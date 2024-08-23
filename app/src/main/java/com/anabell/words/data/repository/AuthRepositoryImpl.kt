@@ -1,5 +1,7 @@
-package com.anabell.words.data
+package com.anabell.words.data.repository
 
+import com.anabell.words.data.AuthLocalDataSource
+import com.anabell.words.data.AuthRemoteDataSource
 import com.anabell.words.domain.AuthRepository
 
 class AuthRepositoryImpl(
@@ -25,5 +27,21 @@ class AuthRepositoryImpl(
 
     override fun clearToken() {
         authLocalDataSource.clearToken()
+    }
+
+    override fun saveUserName(name: String) {
+        authLocalDataSource.saveUserName(name)
+    }
+
+    override fun saveUserEmail(email: String) {
+        authLocalDataSource.saveUserEmail(email)
+    }
+
+    override fun loadUserName(): String {
+        return authLocalDataSource.loadUserName()
+    }
+
+    override fun loadUserEmail(): String {
+        return authLocalDataSource.loadUserEmail()
     }
 }

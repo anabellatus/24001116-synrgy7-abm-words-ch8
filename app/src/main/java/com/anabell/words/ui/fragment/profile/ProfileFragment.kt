@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import com.anabell.words.R
 import com.anabell.words.databinding.FragmentProfileBinding
 import com.anabell.words.ui.auth.AuthCheckerActivity
+
 class ProfileFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentProfileBinding
@@ -41,6 +45,19 @@ class ProfileFragment : Fragment() {
             viewBinding.tvEmail.text = userEmail
         }
 
+        viewBinding.favoriteListButton.setOnClickListener {
+            handleNavigateToFavorite()
+        }
+
+        viewBinding.backButton.setOnClickListener {
+            backToPreviousFragment()
+        }
+
+    }
+
+    private fun backToPreviousFragment() {
+        val host : NavHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.navigation_container) as NavHostFragment
+        host.navController.navigateUp()
     }
 
     private fun logout() {
@@ -48,6 +65,12 @@ class ProfileFragment : Fragment() {
         val intent = Intent(requireActivity(), AuthCheckerActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
+    }
+
+    private fun handleNavigateToFavorite() {
+        val actionToFragmentFavorite =
+            ProfileFragmentDirections.actionProfileFragmentToFavoriteFragment()
+        findNavController().navigate(actionToFragmentFavorite)
     }
 
 }

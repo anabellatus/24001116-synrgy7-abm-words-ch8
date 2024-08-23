@@ -6,16 +6,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.room.Room
 import androidx.savedstate.SavedStateRegistryOwner
-import com.anabell.words.data.repository.AuthRepositoryImpl
-import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
-import com.anabell.words.data.datasource.local.SharedPreferencesFactory
-import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
-import com.anabell.words.domain.AuthRepository
+import com.anabell.words.data.datasource.local.GadgetLocalDataSourceImpl
+import com.anabell.words.data.datasource.local.room.RoomDatabase
+import com.anabell.words.data.datasource.remote.GadgetRemoteDataSourceImpl
 import com.anabell.words.data.model.CategoryGadget
+import com.anabell.words.data.repository.GadgetRepositoryImpl
+import com.anabell.words.domain.GadgetRepository
 
 class ListViewModel(
-    private val authRepository: AuthRepository,
+    private val gadgetRepository: GadgetRepository,
 ) : ViewModel() {
 
     companion object {
@@ -30,16 +31,19 @@ class ListViewModel(
                     modelClass: Class<T>,
                     handle: SavedStateHandle,
                 ): T {
-                    val authRepository: AuthRepository = AuthRepositoryImpl(
-                        authLocalDataSource = AuthLocalDataSourceImpl(
-                            sharedPreferences = SharedPreferencesFactory().createSharedPreferences(
-                                context
-                            )
+                    val roomDatabase: RoomDatabase = Room.databaseBuilder(
+                        context = context,
+                        name = RoomDatabase.NAME,
+                        klass = RoomDatabase::class.java,
+                    ).build()
+                    val gadgetRepository: GadgetRepository = GadgetRepositoryImpl(
+                        localDataSource = GadgetLocalDataSourceImpl(
+                            gadgetDao = roomDatabase.gadgetDao()
                         ),
-                        authRemoteDataSource = AuthRemoteDataSourceImpl(),
+                        remoteDataSource = GadgetRemoteDataSourceImpl()
                     )
                     return ListViewModel(
-                        authRepository = authRepository
+                        gadgetRepository = gadgetRepository,
                     ) as T
                 }
             }
@@ -49,47 +53,6 @@ class ListViewModel(
     val categories: LiveData<List<CategoryGadget>> = _categories
 
     fun retrieveCategoryData() {
-        _categories.value = listOf(
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/3437/3437364.png",
-                name = "Smartphone",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/2888/2888704.png",
-                name = "Laptop",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/564/564579.png",
-                name = "Tablet",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/5906/5906114.png",
-                name = "Earphone",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/2668/2668914.png",
-                name = "Camera",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/8462/8462356.png",
-                name = "Speaker",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/617/617694.png",
-                name = "Smartwatch",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/771/771261.png",
-                name = "Game Console",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/5606/5606227.png",
-                name = "TV",
-            ),
-            CategoryGadget(
-                icon = "https://cdn-icons-png.flaticon.com/512/6212/6212141.png",
-                name = "Tools",
-            ),
-        )
+        _categories.value = gadgetRepository.fetchGadgetCategoryData()
     }
 }

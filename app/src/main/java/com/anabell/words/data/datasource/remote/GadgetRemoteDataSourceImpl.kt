@@ -1,10 +1,11 @@
 package com.anabell.words.data.datasource.remote
 
 import com.anabell.words.data.GadgetRemoteDataSource
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.data.model.Gadget
 
-class GadgetRemoteDataSourceImpl: GadgetRemoteDataSource {
-    override fun fetchData(): List<Gadget> {
+class GadgetRemoteDataSourceImpl : GadgetRemoteDataSource {
+    override fun fetchGadgetData(): List<Gadget> {
         return listOf(
             Gadget(
                 id = 1,
@@ -257,6 +258,51 @@ class GadgetRemoteDataSourceImpl: GadgetRemoteDataSource {
                 name = "Xiaomi Electric Shaver S101",
                 category = "Tools",
                 price = 249000
+            ),
+        )
+    }
+
+    override fun fetchGadgetCategoryData(): List<CategoryGadget> {
+        return listOf(
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/3437/3437364.png",
+                name = "Smartphone",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/2888/2888704.png",
+                name = "Laptop",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/564/564579.png",
+                name = "Tablet",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/5906/5906114.png",
+                name = "Earphone",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/2668/2668914.png",
+                name = "Camera",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/8462/8462356.png",
+                name = "Speaker",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/617/617694.png",
+                name = "Smartwatch",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/771/771261.png",
+                name = "Game Console",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/5606/5606227.png",
+                name = "TV",
+            ),
+            CategoryGadget(
+                icon = "https://cdn-icons-png.flaticon.com/512/6212/6212141.png",
+                name = "Tools",
             ),
         )
     }

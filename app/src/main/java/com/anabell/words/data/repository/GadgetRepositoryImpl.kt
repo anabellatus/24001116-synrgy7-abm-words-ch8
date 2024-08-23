@@ -2,6 +2,7 @@ package com.anabell.words.data.repository
 
 import com.anabell.words.data.GadgetLocalDataSource
 import com.anabell.words.data.GadgetRemoteDataSource
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.data.model.Gadget
 import com.anabell.words.data.model.mapper.toGadget
 import com.anabell.words.data.model.mapper.toGadgetEntity
@@ -11,8 +12,12 @@ class GadgetRepositoryImpl(
     private val remoteDataSource: GadgetRemoteDataSource,
     private val localDataSource: GadgetLocalDataSource
 ) : GadgetRepository {
-    override fun fetchData(): List<Gadget> {
-        return remoteDataSource.fetchData()
+    override fun fetchGadgetData(): List<Gadget> {
+        return remoteDataSource.fetchGadgetData()
+    }
+
+    override fun fetchGadgetCategoryData(): List<CategoryGadget> {
+        return remoteDataSource.fetchGadgetCategoryData()
     }
 
     override suspend fun addFavorite(gadget: Gadget) {
@@ -27,7 +32,11 @@ class GadgetRepositoryImpl(
         localDataSource.deleteGadget(gadget.toGadgetEntity())
     }
 
-    override suspend fun loadGadgetById(id: Int): Gadget {
-        return localDataSource.selectGadgetById(id)!!.toGadget()
+    override suspend fun loadGadgetById(id: Int): Gadget? {
+        return localDataSource.selectGadgetById(id)?.toGadget()
+    }
+
+    override suspend fun isFavorite(id: Int): Boolean {
+        return localDataSource.isFavorite(id)
     }
 }

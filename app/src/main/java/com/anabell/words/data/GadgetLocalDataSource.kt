@@ -11,4 +11,6 @@ interface GadgetLocalDataSource {
     suspend fun selectGadgetById(id: Int): GadgetEntity?
 
     suspend fun selectAllGadgets(): List<GadgetEntity>
+
+    suspend fun isFavorite(id: Int): Boolean
 }

@@ -1,7 +1,6 @@
 package com.anabell.words.ui.fragment.detailgadget
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,8 +24,11 @@ class DetailGadgetViewModel(
     private val _error = MutableLiveData<Throwable>()
     val error: LiveData<Throwable> = _error
 
-    private val _gadgetLocal = MutableLiveData<Gadget>()
-    val gadgetLocal: LiveData<Gadget> = _gadgetLocal
+    private val _isFavorite = MutableLiveData(false)
+    val isFavorite: LiveData<Boolean> = _isFavorite
+
+    private val _gadgetLocal = MutableLiveData<Gadget?>()
+    val gadgetLocal: LiveData<Gadget?> = _gadgetLocal
 
     private var name: String? = null
 
@@ -70,17 +72,9 @@ class DetailGadgetViewModel(
         return "https://www.google.com/search?q=$name"
     }
 
-//    fun filterGadgetByCategory(gadgets: List<Gadget>, categoryName: String): List<Gadget> {
-//        return gadgets.filter { it.category == categoryName }
-//    }
-
     fun setCategoryName(categoryName: String) {
         name = categoryName
     }
-
-//    fun retrieveGadgetData() {
-//        _gadgets.value = repository.fetchData()
-//    }
 
     fun addGadgetToFavorites(
         image: String,
@@ -100,20 +94,19 @@ class DetailGadgetViewModel(
                 )
                 repository.addFavorite(gadget)
                 _insertGadget.value = true
-//                gadget.isFavorite = true
+                _isFavorite.value = true
             } catch (throwable: Throwable) {
                 _error.value = throwable
             }
         }
     }
 
-    fun removeGadgetFromFavorites(gadget: Gadget) {
-        Log.d("DetailFragment", "onRemoveFromFavorite: $gadget")
+    fun removeGadgetFromFavorites() {
         viewModelScope.launch {
             try {
-                repository.deleteGadget(gadget)
+                _gadgetLocal.value?.let { repository.deleteGadget(it) }
                 _deleteGadget.value = true
-//                gadget.isFavorite = false
+                _isFavorite.value = false
             } catch (throwable: Throwable) {
                 _error.value = throwable
             }
@@ -123,7 +116,11 @@ class DetailGadgetViewModel(
     fun loadGadgetsFromFavorite(id: Int) {
         viewModelScope.launch {
             try {
-                _gadgetLocal.value = repository.loadGadgetById(id)
+                val favorited = repository.isFavorite(id)
+                _isFavorite.value = favorited
+                if (favorited) {
+                    _gadgetLocal.value = repository.loadGadgetById(id)
+                }
             } catch (throwable: Throwable) {
                 _error.value = throwable
             }

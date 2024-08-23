@@ -41,5 +41,4 @@ class AuthLocalDataSourceImpl(
         return sharedPreferences.getString(KEY_EMAIL, "") ?: ""
     }
 
-
 }

@@ -1,4 +1,4 @@
-package com.anabell.words.ui.fragment.detail
+package com.anabell.words.ui.fragment.favorite
 
 import android.content.Context
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.GadgetLocalDataSourceImpl
@@ -14,15 +15,20 @@ import com.anabell.words.data.datasource.remote.GadgetRemoteDataSourceImpl
 import com.anabell.words.data.model.Gadget
 import com.anabell.words.data.repository.GadgetRepositoryImpl
 import com.anabell.words.domain.GadgetRepository
+import kotlinx.coroutines.launch
 
-class DetailViewModel(
-    private val repository: GadgetRepository,
+class FavoriteViewModel(
+    private val gadgetRepository: GadgetRepository
 ) : ViewModel() {
 
-    private val _gadgets: MutableLiveData<List<Gadget>> = MutableLiveData()
-    val gadgets: LiveData<List<Gadget>> = _gadgets
+    private val _error = MutableLiveData<Throwable>()
+    val error: LiveData<Throwable> = _error
 
-    private var name: String? = null
+    private val _gadgets = MutableLiveData<List<Gadget?>>()
+    val gadgets: LiveData<List<Gadget?>> = _gadgets
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
 
     companion object {
         fun provideFactory(
@@ -47,26 +53,24 @@ class DetailViewModel(
                         ),
                         remoteDataSource = GadgetRemoteDataSourceImpl()
                     )
-                    return DetailViewModel(
-                        repository = repository,
+                    return FavoriteViewModel(
+                        gadgetRepository = repository,
                     ) as T
                 }
             }
     }
 
-    fun getUrl(name: String): String {
-        return "https://www.google.com/search?q=$name"
+    fun loadAllFavoriteGadget() {
+        viewModelScope.launch {
+            try {
+                _loading.value = true
+                _gadgets.value = gadgetRepository.loadGadget()
+                _loading.value = false
+            } catch (throwable: Throwable) {
+                _loading.value = false
+                _error.value = throwable
+            }
+        }
     }
 
-    fun filterGadgetByCategory(gadgets: List<Gadget>, categoryName: String): List<Gadget> {
-        return gadgets.filter { it.category == categoryName }
-    }
-
-    fun setCategoryName(categoryName: String) {
-        name = categoryName
-    }
-
-    fun retrieveGadgetData() {
-        _gadgets.value = repository.fetchGadgetData()
-    }
 }

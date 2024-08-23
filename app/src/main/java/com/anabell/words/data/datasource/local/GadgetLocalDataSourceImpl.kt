@@ -22,4 +22,8 @@ class GadgetLocalDataSourceImpl(
     override suspend fun selectAllGadgets(): List<GadgetEntity> {
         return gadgetDao.selectAllGadgets()
     }
+
+    override suspend fun isFavorite(id: Int): Boolean {
+        return gadgetDao.isFavorite(id)
+    }
 }

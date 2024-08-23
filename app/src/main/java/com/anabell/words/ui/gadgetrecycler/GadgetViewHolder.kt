@@ -1,9 +1,7 @@
 package com.anabell.words.ui.gadgetrecycler
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.anabell.words.R
 import com.anabell.words.data.model.Gadget
 import com.anabell.words.databinding.ItemGadgetBinding
 

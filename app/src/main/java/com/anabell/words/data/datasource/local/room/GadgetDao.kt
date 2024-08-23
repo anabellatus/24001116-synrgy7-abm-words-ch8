@@ -20,4 +20,7 @@ interface GadgetDao {
 
     @Query("SELECT * FROM gadget")
     suspend fun selectAllGadgets(): List<GadgetEntity>
+
+    @Query("SELECT EXISTS(SELECT * FROM gadget WHERE id = :id)")
+    suspend fun isFavorite(id: Int): Boolean
 }

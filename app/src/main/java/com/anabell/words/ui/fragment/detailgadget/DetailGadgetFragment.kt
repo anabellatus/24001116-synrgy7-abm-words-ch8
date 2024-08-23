@@ -1,11 +1,13 @@
 package com.anabell.words.ui.fragment.detailgadget
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
@@ -32,13 +34,14 @@ class DetailGadgetFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.gadgetLocal.observe(viewLifecycleOwner) { gadget ->
-            if (gadget != null) {
+        viewModel.loadGadgetsFromFavorite(getArgsId())
+
+
+        viewModel.isFavorite.observe(viewLifecycleOwner) { v ->
+            if (v) {
                 viewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
                 viewBinding.favoriteButton.setOnClickListener {
-                    viewModel.removeGadgetFromFavorites(
-                        gadget
-                    )
+                    viewModel.removeGadgetFromFavorites()
                 }
             } else {
                 viewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
@@ -48,18 +51,21 @@ class DetailGadgetFragment : Fragment() {
                         name = getName(),
                         category = getCategory(),
                         price = getPrice(),
+                        id = getArgsId()
                     )
                 }
             }
         }
 
         viewModel.error.observe(viewLifecycleOwner) { error ->
-            Toast.makeText(context, error.message.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "error : " + error.message.toString(), Toast.LENGTH_SHORT)
+                .show()
         }
 
         viewModel.insertGadget.observe(viewLifecycleOwner) { insert ->
             if (insert) {
-                Toast.makeText(context, "Berhasil ditambahkan ke favorit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Berhasil ditambahkan ke favorit", Toast.LENGTH_SHORT)
+                    .show()
                 viewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
             }
         }
@@ -76,8 +82,6 @@ class DetailGadgetFragment : Fragment() {
         viewBinding.tvProductPrice.text = getPrice().toString()
         viewModel.setCategoryName(getCategory())
 
-        viewModel.loadGadgetsFromFavorite(getArgsId())
-
         viewBinding.profileButton.setOnClickListener {
             goToProfileFragment()
         }
@@ -87,6 +91,12 @@ class DetailGadgetFragment : Fragment() {
         val actionToFragmentProfile =
             DetailGadgetFragmentDirections.actionDetailGadgetFragmentToProfileFragment()
         findNavController().navigate(actionToFragmentProfile)
+    }
+
+    private fun handleNavigateToGoogle(name: String) {
+        val urlIntent = Intent(Intent.ACTION_VIEW)
+        urlIntent.data = Uri.parse(viewModel.getUrl(name))
+        startActivity(urlIntent)
     }
 
     private fun getName(): String {

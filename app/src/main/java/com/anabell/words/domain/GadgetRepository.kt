@@ -1,10 +1,13 @@
 package com.anabell.words.domain
 
+import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.data.model.Gadget
 
 interface GadgetRepository {
 
-    fun fetchData(): List<Gadget>
+    fun fetchGadgetData(): List<Gadget>
+
+    fun fetchGadgetCategoryData(): List<CategoryGadget>
 
     suspend fun addFavorite(gadget: Gadget)
 
@@ -12,5 +15,7 @@ interface GadgetRepository {
 
     suspend fun deleteGadget(gadget: Gadget)
 
-    suspend fun loadGadgetById(id: Int): Gadget
+    suspend fun loadGadgetById(id: Int): Gadget?
+
+    suspend fun isFavorite(id: Int): Boolean
 }

@@ -2,19 +2,19 @@ package com.anabell.words.ui.fragment.list
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapter
-import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapterListener
 import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.databinding.FragmentListBinding
+import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapter
+import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapterListener
 
 
 class ListFragment : Fragment(), CategoryAdapterListener {
@@ -23,7 +23,7 @@ class ListFragment : Fragment(), CategoryAdapterListener {
     private val categoryAdapter by lazy { CategoryAdapter(this) }
 
     private val viewModel: ListViewModel by viewModels<ListViewModel>() {
-        ListViewModel.provideFactory(this, requireActivity().applicationContext)
+        ListViewModel.provideFactory(this, requireContext())
     }
 
     override fun onCreateView(

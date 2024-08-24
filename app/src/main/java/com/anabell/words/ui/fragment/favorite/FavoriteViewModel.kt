@@ -12,6 +12,8 @@ import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.GadgetLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.room.RoomDatabase
 import com.anabell.words.data.datasource.remote.GadgetRemoteDataSourceImpl
+import com.anabell.words.data.datasource.remote.retrofit.GadgetService
+import com.anabell.words.data.datasource.remote.retrofit.provideGadgetService
 import com.anabell.words.data.model.Gadget
 import com.anabell.words.data.repository.GadgetRepositoryImpl
 import com.anabell.words.domain.GadgetRepository
@@ -51,7 +53,9 @@ class FavoriteViewModel(
                         localDataSource = GadgetLocalDataSourceImpl(
                             gadgetDao = roomDatabase.gadgetDao()
                         ),
-                        remoteDataSource = GadgetRemoteDataSourceImpl()
+                        remoteDataSource = GadgetRemoteDataSourceImpl(
+                            gadgetService = provideGadgetService()
+                        )
                     )
                     return FavoriteViewModel(
                         gadgetRepository = repository,

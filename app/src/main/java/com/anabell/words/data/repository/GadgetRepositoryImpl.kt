@@ -12,11 +12,12 @@ class GadgetRepositoryImpl(
     private val remoteDataSource: GadgetRemoteDataSource,
     private val localDataSource: GadgetLocalDataSource
 ) : GadgetRepository {
-    override fun fetchGadgetData(): List<Gadget> {
+
+    override suspend fun fetchGadgetData(): List<Gadget> {
         return remoteDataSource.fetchGadgetData()
     }
 
-    override fun fetchGadgetCategoryData(): List<CategoryGadget> {
+    override suspend fun fetchGadgetCategoryData(): List<CategoryGadget> {
         return remoteDataSource.fetchGadgetCategoryData()
     }
 

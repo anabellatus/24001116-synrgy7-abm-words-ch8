@@ -6,18 +6,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.GadgetLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.room.RoomDatabase
 import com.anabell.words.data.datasource.remote.GadgetRemoteDataSourceImpl
+import com.anabell.words.data.datasource.remote.retrofit.provideGadgetService
 import com.anabell.words.data.model.CategoryGadget
 import com.anabell.words.data.repository.GadgetRepositoryImpl
 import com.anabell.words.domain.GadgetRepository
+import kotlinx.coroutines.launch
 
 class ListViewModel(
     private val gadgetRepository: GadgetRepository,
 ) : ViewModel() {
+
+    private val _error = MutableLiveData<Throwable>()
+    val error: LiveData<Throwable> = _error
 
     companion object {
         fun provideFactory(
@@ -40,7 +46,9 @@ class ListViewModel(
                         localDataSource = GadgetLocalDataSourceImpl(
                             gadgetDao = roomDatabase.gadgetDao()
                         ),
-                        remoteDataSource = GadgetRemoteDataSourceImpl()
+                        remoteDataSource = GadgetRemoteDataSourceImpl(
+                            gadgetService = provideGadgetService()
+                        )
                     )
                     return ListViewModel(
                         gadgetRepository = gadgetRepository,
@@ -53,6 +61,12 @@ class ListViewModel(
     val categories: LiveData<List<CategoryGadget>> = _categories
 
     fun retrieveCategoryData() {
-        _categories.value = gadgetRepository.fetchGadgetCategoryData()
+        viewModelScope.launch {
+            try {
+                _categories.value = gadgetRepository.fetchGadgetCategoryData()
+            } catch (throwable: Throwable) {
+                _error.value = throwable
+            }
+        }
     }
 }

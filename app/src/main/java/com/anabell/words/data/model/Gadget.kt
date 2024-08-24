@@ -7,6 +7,5 @@ data class Gadget(
     val name: String,
     val category: String,
     val price: Int,
-    var isFavorite: Boolean = false
 
-    )
+)

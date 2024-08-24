@@ -9,7 +9,7 @@
         android:id="@+id/listFragment"
         android:name="com.anabell.words.ui.fragment.list.ListFragment"
         android:label="Gadgets"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -18,65 +18,65 @@
         android:id="@+id/detailFragment"
         android:name="com.anabell.words.ui.fragment.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <action
             android:id="@+id/action_detailFragment_to_detailGadgetFragment"
             app:destination="@id/detailGadgetFragment" />
         <argument
             android:name="name"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
         <argument
             android:name="image"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <argument
             android:name="category"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/detailGadgetFragment"
         android:name="com.anabell.words.ui.fragment.detailgadget.DetailGadgetFragment"
         android:label="fragment_detail_gadget"
-        tools:layout="@layout/fragment_detail_gadget" >
+        tools:layout="@layout/fragment_detail_gadget">
         <action
             android:id="@+id/action_detailGadgetFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
         <argument
             android:name="name"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
         <argument
             android:name="image"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
         <argument
             android:name="price"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
         <argument
             android:name="id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <argument
             android:name="category"
-            app:argType="string"
-            android:defaultValue=""/>
+            android:defaultValue=""
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.anabell.words.ui.fragment.profile.ProfileFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
@@ -86,6 +86,6 @@
         android:id="@+id/favoriteFragment"
         android:name="com.anabell.words.ui.fragment.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
     </fragment>
 </navigation>

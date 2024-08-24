@@ -5,9 +5,9 @@ import com.anabell.words.data.model.Gadget
 
 interface GadgetRepository {
 
-    fun fetchGadgetData(): List<Gadget>
+    suspend fun fetchGadgetData(): List<Gadget>
 
-    fun fetchGadgetCategoryData(): List<CategoryGadget>
+    suspend fun fetchGadgetCategoryData(): List<CategoryGadget>
 
     suspend fun addFavorite(gadget: Gadget)
 

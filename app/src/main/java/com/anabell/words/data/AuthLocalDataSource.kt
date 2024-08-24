@@ -2,17 +2,17 @@ package com.anabell.words.data
 
 interface AuthLocalDataSource {
 
-    fun saveToken(token: String)
+    suspend fun saveToken(token: String)
 
-    fun loadToken(): String?
+    suspend fun loadToken(): String?
 
-    fun clearToken()
+    suspend fun clearToken()
 
-    fun saveUserName(name: String)
+    suspend fun saveUserName(name: String)
 
-    fun saveUserEmail(email: String)
+    suspend fun saveUserEmail(email: String)
 
-    fun loadUserName(): String
+    suspend fun loadUserName(): String?
 
-    fun loadUserEmail(): String
+    suspend fun loadUserEmail(): String?
 }

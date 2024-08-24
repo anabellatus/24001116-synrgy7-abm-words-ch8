@@ -6,12 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.SharedPreferencesFactory
+import com.anabell.words.data.datasource.local.dataStore
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.anabell.words.data.repository.AuthRepositoryImpl
 import com.anabell.words.domain.AuthRepository
+import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val authRepository: AuthRepository,
@@ -31,9 +34,7 @@ class ProfileViewModel(
                 ): T {
                     val authRepository: AuthRepository = AuthRepositoryImpl(
                         authLocalDataSource = AuthLocalDataSourceImpl(
-                            sharedPreferences = SharedPreferencesFactory().createSharedPreferences(
-                                context
-                            )
+                            dataStore = context.dataStore,
                         ),
                         authRemoteDataSource = AuthRemoteDataSourceImpl(),
                     )
@@ -51,11 +52,17 @@ class ProfileViewModel(
     val userEmail: LiveData<String> = _userEmail
 
     fun getProfileData() {
-        _userName.value = authRepository.loadUserName()
-        _userEmail.value = authRepository.loadUserEmail()
+        viewModelScope.launch {
+            _userName.value = authRepository.loadUserName()
+            _userEmail.value = authRepository.loadUserEmail()
+        }
+
     }
 
     fun logout() {
-        authRepository.clearToken()
+        viewModelScope.launch {
+            authRepository.clearToken()
+        }
+
     }
 }

@@ -9,39 +9,39 @@ class AuthRepositoryImpl(
     private val authRemoteDataSource: AuthRemoteDataSource,
 ) : AuthRepository {
 
-    override fun login(email: String, password: String): String {
+    override suspend fun login(email: String, password: String): String {
         return authRemoteDataSource.login(email, password)
     }
 
-    override fun register(name: String, email: String, password: String): String {
+    override suspend fun register(name: String, email: String, password: String): String {
         return authRemoteDataSource.register(name, email, password)
     }
 
-    override fun saveToken(token: String) {
+    override suspend fun saveToken(token: String) {
         authLocalDataSource.saveToken(token)
     }
 
-    override fun loadToken(): String? {
+    override suspend fun loadToken(): String? {
         return authLocalDataSource.loadToken()
     }
 
-    override fun clearToken() {
+    override suspend fun clearToken() {
         authLocalDataSource.clearToken()
     }
 
-    override fun saveUserName(name: String) {
+    override suspend fun saveUserName(name: String) {
         authLocalDataSource.saveUserName(name)
     }
 
-    override fun saveUserEmail(email: String) {
+    override suspend fun saveUserEmail(email: String) {
         authLocalDataSource.saveUserEmail(email)
     }
 
-    override fun loadUserName(): String {
+    override suspend fun loadUserName(): String? {
         return authLocalDataSource.loadUserName()
     }
 
-    override fun loadUserEmail(): String {
+    override suspend fun loadUserEmail(): String? {
         return authLocalDataSource.loadUserEmail()
     }
 }

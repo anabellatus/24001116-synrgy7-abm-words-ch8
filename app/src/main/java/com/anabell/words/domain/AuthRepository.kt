@@ -2,22 +2,22 @@ package com.anabell.words.domain
 
 interface AuthRepository {
 
-    fun login(email: String, password: String): String
+    suspend fun login(email: String, password: String): String
 
-    fun register(name: String, email: String, password: String): String
+    suspend fun register(name: String, email: String, password: String): String
 
-    fun saveToken(token: String)
+    suspend fun saveToken(token: String)
 
-    fun loadToken(): String?
+    suspend fun loadToken(): String?
 
-    fun clearToken()
+    suspend fun clearToken()
 
-    fun saveUserName(name: String)
+    suspend fun saveUserName(name: String)
 
-    fun saveUserEmail(email: String)
+    suspend fun saveUserEmail(email: String)
 
-    fun loadUserName(): String
+    suspend fun loadUserName(): String?
 
-    fun loadUserEmail(): String
+    suspend fun loadUserEmail(): String?
 
 }

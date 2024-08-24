@@ -6,12 +6,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.SharedPreferencesFactory
+import com.anabell.words.data.datasource.local.dataStore
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.anabell.words.data.repository.AuthRepositoryImpl
 import com.anabell.words.domain.AuthRepository
+import kotlinx.coroutines.launch
 
 class RegisterViewModel(
     private val authRepository: AuthRepository,
@@ -31,9 +34,7 @@ class RegisterViewModel(
                 ): T {
                     val authRepository: AuthRepository = AuthRepositoryImpl(
                         authLocalDataSource = AuthLocalDataSourceImpl(
-                            sharedPreferences = SharedPreferencesFactory().createSharedPreferences(
-                                context
-                            )
+                            dataStore = context.dataStore,
                         ),
                         authRemoteDataSource = AuthRemoteDataSourceImpl(),
                     )
@@ -54,17 +55,19 @@ class RegisterViewModel(
     val error: LiveData<Throwable> = _error
 
     fun register(name: String, email: String, password: String) {
-        try {
-            _loading.value = true
-            val token = authRepository.register(name, email, password)
-            authRepository.saveToken(token)
-            authRepository.saveUserName(name)
-            authRepository.saveUserEmail(email)
-            _loading.value = false
-            _success.value = true
-        } catch (throwable: Throwable) {
-            _loading.value = false
-            _error.value = throwable
+        viewModelScope.launch {
+            try {
+                _loading.value = true
+                val token = authRepository.register(name, email, password)
+                authRepository.saveToken(token)
+                authRepository.saveUserName(name)
+                authRepository.saveUserEmail(email)
+                _loading.value = false
+                _success.value = true
+            } catch (throwable: Throwable) {
+                _loading.value = false
+                _error.value = throwable
+            }
         }
     }
 }

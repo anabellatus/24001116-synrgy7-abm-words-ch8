@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedStateRegistryOwner
 import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
-import com.anabell.words.data.datasource.local.SharedPreferencesFactory
 import com.anabell.words.data.datasource.local.dataStore
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.anabell.words.data.repository.AuthRepositoryImpl
@@ -53,15 +52,23 @@ class ProfileViewModel(
 
     fun getProfileData() {
         viewModelScope.launch {
-            _userName.value = authRepository.loadUserName()
-            _userEmail.value = authRepository.loadUserEmail()
+            try {
+//                _userName.value = authRepository.loadUserName()
+                _userEmail.value = authRepository.loadUserEmail()
+            } catch (throwable: Throwable) {
+                throwable.printStackTrace()
+            }
         }
 
     }
 
     fun logout() {
         viewModelScope.launch {
-            authRepository.clearToken()
+            try {
+                authRepository.clearToken()
+            } catch (throwable: Throwable) {
+                throwable.printStackTrace()
+            }
         }
 
     }

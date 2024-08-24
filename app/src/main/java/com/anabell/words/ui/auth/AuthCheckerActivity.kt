@@ -16,11 +16,11 @@ class AuthCheckerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.isLoggedIn.observe(this){ isLoggedIn ->
+        viewModel.isLoggedIn.observe(this) { isLoggedIn ->
             if (isLoggedIn) {
-                startActivity(Intent(this, LoginActivity::class.java))
-            } else {
                 startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this, LoginActivity::class.java))
             }
         }
 

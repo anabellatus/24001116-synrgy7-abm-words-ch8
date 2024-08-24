@@ -1,15 +1,12 @@
 package com.anabell.words.data.datasource.local
 
-import android.content.SharedPreferences
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.anabell.words.data.AuthLocalDataSource
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.single
 
 class AuthLocalDataSourceImpl(
     private val dataStore: DataStore<Preferences>,

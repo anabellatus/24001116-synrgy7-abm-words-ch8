@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.anabell.words.data.model.Gadget
+import com.anabell.words.domain.model.Gadget
 import com.anabell.words.databinding.FragmentDetailBinding
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapter
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapterListener

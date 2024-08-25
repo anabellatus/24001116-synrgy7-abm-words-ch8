@@ -6,7 +6,7 @@ import com.anabell.words.data.datasource.local.room.GadgetEntity
 
 class GadgetLocalDataSourceImpl(
     private val gadgetDao: GadgetDao,
-): GadgetLocalDataSource {
+): com.anabell.words.data.GadgetLocalDataSource {
     override suspend fun insertGadget(gadgetEntity: GadgetEntity) {
         gadgetDao.insertGadget(gadgetEntity)
     }

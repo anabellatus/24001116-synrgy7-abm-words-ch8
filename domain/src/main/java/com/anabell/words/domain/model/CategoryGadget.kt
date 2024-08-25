@@ -1,4 +1,4 @@
-package com.anabell.words.data.model
+package com.anabell.words.domain.model
 
 data class CategoryGadget(
 

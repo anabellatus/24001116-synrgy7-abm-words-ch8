@@ -13,9 +13,9 @@ import com.anabell.words.data.datasource.local.GadgetLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.room.RoomDatabase
 import com.anabell.words.data.datasource.remote.GadgetRemoteDataSourceImpl
 import com.anabell.words.data.datasource.remote.retrofit.provideGadgetService
-import com.anabell.words.data.model.CategoryGadget
+import com.anabell.words.domain.model.CategoryGadget
 import com.anabell.words.data.repository.GadgetRepositoryImpl
-import com.anabell.words.domain.GadgetRepository
+import com.anabell.words.domain.repository.GadgetRepository
 import kotlinx.coroutines.launch
 
 class ListViewModel(

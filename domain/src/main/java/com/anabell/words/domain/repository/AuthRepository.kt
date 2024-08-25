@@ -1,4 +1,4 @@
-package com.anabell.words.domain
+package com.anabell.words.domain.repository
 
 interface AuthRepository {
 

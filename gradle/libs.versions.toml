@@ -22,6 +22,7 @@ retrofit = "2.11.0"
 gson = "2.10.1"
 okhttp = "4.12.0"
 jetbrainsKotlinJvm = "1.9.0"
+dependencyGraph = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,3 +57,4 @@ safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigationCompo
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+dependencyGraph = { id = "land.sungbin.dependency.graph.plugin", version.ref = "dependencyGraph" }

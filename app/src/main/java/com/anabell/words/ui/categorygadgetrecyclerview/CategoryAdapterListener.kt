@@ -1,6 +1,6 @@
 package com.anabell.words.ui.categorygadgetrecyclerview
 
-import com.anabell.words.data.model.CategoryGadget
+import com.anabell.words.domain.model.CategoryGadget
 
 
 interface CategoryAdapterListener {

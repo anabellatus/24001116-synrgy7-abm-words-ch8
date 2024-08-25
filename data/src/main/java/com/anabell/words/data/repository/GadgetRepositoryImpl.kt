@@ -2,15 +2,15 @@ package com.anabell.words.data.repository
 
 import com.anabell.words.data.GadgetLocalDataSource
 import com.anabell.words.data.GadgetRemoteDataSource
-import com.anabell.words.data.model.CategoryGadget
-import com.anabell.words.data.model.Gadget
-import com.anabell.words.data.model.mapper.toGadget
-import com.anabell.words.data.model.mapper.toGadgetEntity
-import com.anabell.words.domain.GadgetRepository
+import com.anabell.words.domain.model.CategoryGadget
+import com.anabell.words.domain.model.Gadget
+import com.anabell.words.data.mapper.toGadget
+import com.anabell.words.data.mapper.toGadgetEntity
+import com.anabell.words.domain.repository.GadgetRepository
 
 class GadgetRepositoryImpl(
     private val remoteDataSource: GadgetRemoteDataSource,
-    private val localDataSource: GadgetLocalDataSource
+    private val localDataSource: com.anabell.words.data.GadgetLocalDataSource
 ) : GadgetRepository {
 
     override suspend fun fetchGadgetData(): List<Gadget> {

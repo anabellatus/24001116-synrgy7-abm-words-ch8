@@ -12,7 +12,7 @@ import com.anabell.words.data.datasource.local.AuthLocalDataSourceImpl
 import com.anabell.words.data.datasource.local.dataStore
 import com.anabell.words.data.datasource.remote.AuthRemoteDataSourceImpl
 import com.anabell.words.data.repository.AuthRepositoryImpl
-import com.anabell.words.domain.AuthRepository
+import com.anabell.words.domain.repository.AuthRepository
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(

@@ -1,7 +1,7 @@
-package com.anabell.words.data.model.mapper
+package com.anabell.words.data.mapper
 
 import com.anabell.words.data.datasource.local.room.GadgetEntity
-import com.anabell.words.data.model.Gadget
+import com.anabell.words.domain.model.Gadget
 
 fun Gadget.toGadgetEntity(): GadgetEntity {
     return GadgetEntity(

@@ -2,7 +2,7 @@ package com.anabell.words.data.repository
 
 import com.anabell.words.data.AuthLocalDataSource
 import com.anabell.words.data.AuthRemoteDataSource
-import com.anabell.words.domain.AuthRepository
+import com.anabell.words.domain.repository.AuthRepository
 
 class AuthRepositoryImpl(
     private val authLocalDataSource: AuthLocalDataSource,

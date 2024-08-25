@@ -1,7 +1,7 @@
 package com.anabell.words.data
 
-import com.anabell.words.data.model.CategoryGadget
-import com.anabell.words.data.model.Gadget
+import com.anabell.words.domain.model.CategoryGadget
+import com.anabell.words.domain.model.Gadget
 
 interface GadgetRemoteDataSource {
 

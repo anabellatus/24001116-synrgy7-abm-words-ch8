@@ -18,25 +18,6 @@ class GadgetViewHolder(
             gadgetAdapterListener.onClickGadget(data)
         }
 
-//        val isFavorite = data.isFavorite
-//
-//        if (isFavorite) {
-//            itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
-//        } else {
-//            itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
-//        }
-//
-//        itemViewBinding.favoriteButton.setOnClickListener {
-//            if (isFavorite) {
-//                Log.d("GadgetViewHolder", "Remove from favorite")
-//                gadgetAdapterListener.onRemoveFromFavorite(data)
-//                itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
-//            } else {
-//                gadgetAdapterListener.onAddToFavorite(data)
-//                itemViewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
-//            }
-//        }
-
     }
 
 }

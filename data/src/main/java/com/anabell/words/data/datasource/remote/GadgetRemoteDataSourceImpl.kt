@@ -5,9 +5,9 @@ import com.anabell.words.data.datasource.remote.retrofit.GadgetService
 import com.anabell.words.domain.model.CategoryGadget
 import com.anabell.words.domain.model.Gadget
 
-class GadgetRemoteDataSourceImpl (
+class GadgetRemoteDataSourceImpl(
     private val gadgetService: GadgetService
-): GadgetRemoteDataSource {
+) : GadgetRemoteDataSource {
     override suspend fun fetchGadgetData(): List<Gadget> {
         return gadgetService.getGadgets()
 //        listOf(

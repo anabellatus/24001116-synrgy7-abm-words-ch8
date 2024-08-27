@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import com.anabell.words.MyApplication
 import com.anabell.words.domain.model.Gadget
 import com.anabell.words.databinding.FragmentDetailBinding
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapter
@@ -22,7 +23,7 @@ class DetailFragment : Fragment(), GadgetAdapterListener {
     private val gadgetAdapter by lazy { GadgetAdapter(this) }
 
     private val viewModel: DetailViewModel by viewModels<DetailViewModel> {
-        DetailViewModel.provideFactory(this, requireContext())
+        (activity?.application as MyApplication).viewModelFactory
     }
 
     override fun onCreateView(

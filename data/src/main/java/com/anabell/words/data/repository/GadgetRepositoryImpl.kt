@@ -10,7 +10,7 @@ import com.anabell.words.domain.repository.GadgetRepository
 
 class GadgetRepositoryImpl(
     private val remoteDataSource: GadgetRemoteDataSource,
-    private val localDataSource: com.anabell.words.data.GadgetLocalDataSource
+    private val localDataSource: GadgetLocalDataSource
 ) : GadgetRepository {
 
     override suspend fun fetchGadgetData(): List<Gadget> {

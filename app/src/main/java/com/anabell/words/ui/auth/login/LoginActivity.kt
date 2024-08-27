@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.ActivityLoginBinding
 import com.anabell.words.ui.MainActivity
@@ -18,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val viewModel: LoginViewModel by viewModels<LoginViewModel> {
-        LoginViewModel.provideFactory(this, this)
+        (application as MyApplication).viewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import com.anabell.words.MyApplication
 import com.anabell.words.domain.model.Gadget
 import com.anabell.words.databinding.FragmentFavoriteBinding
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapter
@@ -20,7 +21,7 @@ class FavoriteFragment : Fragment(), GadgetAdapterListener {
 
     private lateinit var viewBinding: FragmentFavoriteBinding
     private val viewModel by viewModels<FavoriteViewModel> {
-        FavoriteViewModel.provideFactory(this, requireContext())
+        (activity?.application as MyApplication).viewModelFactory
     }
     private val gadgetAdapter by lazy { GadgetAdapter(this) }
 

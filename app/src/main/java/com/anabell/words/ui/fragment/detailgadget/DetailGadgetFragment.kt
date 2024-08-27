@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
+import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.FragmentDetailGadgetBinding
 
@@ -19,7 +20,7 @@ class DetailGadgetFragment : Fragment() {
     private lateinit var viewBinding: FragmentDetailGadgetBinding
 
     private val viewModel by viewModels<DetailGadgetViewModel> {
-        DetailGadgetViewModel.provideFactory(this, requireContext())
+        (activity?.application as MyApplication).viewModelFactory
     }
 
     override fun onCreateView(

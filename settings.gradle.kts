@@ -23,3 +23,4 @@ rootProject.name = "Words"
 include(":app")
 include(":domain")
 include(":data")
+include(":di")

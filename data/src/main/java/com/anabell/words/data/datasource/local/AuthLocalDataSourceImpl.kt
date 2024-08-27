@@ -13,9 +13,9 @@ class AuthLocalDataSourceImpl(
 ) : AuthLocalDataSource {
 
     companion object {
-        const val KEY_TOKEN = "token"
-        const val KEY_NAME = "name"
-        const val KEY_EMAIL = "email"
+        private const val KEY_TOKEN = "token"
+        private const val KEY_NAME = "name"
+        private const val KEY_EMAIL = "email"
         private val DATASTORE_KEY_TOKEN = stringPreferencesKey(KEY_TOKEN)
         private val DATASTORE_KEY_NAME = stringPreferencesKey(KEY_NAME)
         private val DATASTORE_KEY_EMAIL = stringPreferencesKey(KEY_EMAIL)

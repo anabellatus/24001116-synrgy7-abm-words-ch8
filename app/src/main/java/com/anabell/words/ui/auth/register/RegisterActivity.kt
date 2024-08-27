@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.ActivityRegisterBinding
 import com.anabell.words.ui.MainActivity
@@ -17,7 +18,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private val viewModel: RegisterViewModel by viewModels<RegisterViewModel> {
-        RegisterViewModel.provideFactory(this, this)
+        (application as MyApplication).viewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

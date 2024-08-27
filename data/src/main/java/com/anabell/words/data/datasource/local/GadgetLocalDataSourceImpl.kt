@@ -1,6 +1,5 @@
 package com.anabell.words.data.datasource.local
 
-import com.anabell.words.data.GadgetLocalDataSource
 import com.anabell.words.data.datasource.local.room.GadgetDao
 import com.anabell.words.data.datasource.local.room.GadgetEntity
 

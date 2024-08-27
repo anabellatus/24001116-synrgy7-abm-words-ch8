@@ -44,7 +44,7 @@ android {
 dependencies {
 
     implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":di"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -53,20 +53,30 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
     implementation(libs.androidx.swiperefreshlayout)
+
     implementation(libs.coil)
+
     implementation(libs.androidx.annotation)
+
     implementation(libs.androidx.lifecycle.livedata.ktx)
+
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     implementation(libs.androidx.datastore.preferences)
+
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.gson)
+
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

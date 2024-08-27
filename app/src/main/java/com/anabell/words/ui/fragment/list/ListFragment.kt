@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.anabell.words.MyApplication
 import com.anabell.words.domain.model.CategoryGadget
 import com.anabell.words.databinding.FragmentListBinding
 import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapter
@@ -23,7 +24,7 @@ class ListFragment : Fragment(), CategoryAdapterListener {
     private val categoryAdapter by lazy { CategoryAdapter(this) }
 
     private val viewModel: ListViewModel by viewModels<ListViewModel>() {
-        ListViewModel.provideFactory(this, requireContext())
+        (activity?.application as MyApplication).viewModelFactory
     }
 
     override fun onCreateView(

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.anabell.words.data"
+    namespace = "com.anabell.words.di"
     compileSdk = 34
 
     defaultConfig {
@@ -36,18 +36,11 @@ android {
 dependencies {
 
     implementation(project(":domain"))
+    implementation(project(":data"))
 
+    implementation(libs.androidx.datastore.preferences)
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-
-    implementation(libs.androidx.datastore.preferences)
-
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.gson)
-
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
 
 }

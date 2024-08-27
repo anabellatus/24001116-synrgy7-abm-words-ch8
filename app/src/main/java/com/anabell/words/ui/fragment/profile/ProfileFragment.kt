@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.FragmentProfileBinding
 import com.anabell.words.ui.auth.AuthCheckerActivity
@@ -18,7 +19,7 @@ class ProfileFragment : Fragment() {
     private lateinit var viewBinding: FragmentProfileBinding
 
     private val viewModel: ProfileViewModel by viewModels<ProfileViewModel>() {
-        ProfileViewModel.provideFactory(this, requireContext())
+        (activity?.application as MyApplication).viewModelFactory
     }
 
     override fun onCreateView(
@@ -56,7 +57,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun backToPreviousFragment() {
-        val host : NavHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.navigation_container) as NavHostFragment
+        val host: NavHostFragment =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.navigation_container) as NavHostFragment
         host.navController.navigateUp()
     }
 

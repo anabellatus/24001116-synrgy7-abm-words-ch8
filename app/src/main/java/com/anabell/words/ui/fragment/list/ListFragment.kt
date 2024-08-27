@@ -6,16 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.anabell.words.MyApplication
-import com.anabell.words.domain.model.CategoryGadget
 import com.anabell.words.databinding.FragmentListBinding
+import com.anabell.words.domain.model.CategoryGadget
 import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapter
 import com.anabell.words.ui.categorygadgetrecyclerview.CategoryAdapterListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ListFragment : Fragment(), CategoryAdapterListener {
@@ -23,9 +22,7 @@ class ListFragment : Fragment(), CategoryAdapterListener {
     private lateinit var viewBinding: FragmentListBinding
     private val categoryAdapter by lazy { CategoryAdapter(this) }
 
-    private val viewModel: ListViewModel by viewModels<ListViewModel>() {
-        (activity?.application as MyApplication).viewModelFactory
-    }
+    private val viewModel by viewModel<ListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

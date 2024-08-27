@@ -1,20 +1,23 @@
 package com.anabell.words
 
 import android.app.Application
-import com.anabell.words.di.Module
-import com.anabell.words.di.factory.ViewModelFactory
+import com.anabell.words.di.factory.viewModelModule
+import com.anabell.words.di.koinModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 
 class MyApplication : Application() {
 
-    private lateinit var module: Module
-    lateinit var viewModelFactory: ViewModelFactory
-
     override fun onCreate() {
         super.onCreate()
 
-        module = Module(this)
-        viewModelFactory = ViewModelFactory(module)
+        startKoin {
+            androidLogger()
+            androidContext(this@MyApplication)
+            modules(koinModule, viewModelModule)
+        }
 
     }
 }

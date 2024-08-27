@@ -2,17 +2,14 @@ package com.anabell.words.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.anabell.words.MyApplication
 import com.anabell.words.ui.MainActivity
 import com.anabell.words.ui.auth.login.LoginActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthCheckerActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<AuthCheckerViewModel>() {
-        (application as MyApplication).viewModelFactory
-    }
+    private val viewModel by viewModel<AuthCheckerViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

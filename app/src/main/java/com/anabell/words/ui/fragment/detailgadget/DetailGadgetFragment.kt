@@ -8,20 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
-import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.FragmentDetailGadgetBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailGadgetFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentDetailGadgetBinding
 
-    private val viewModel by viewModels<DetailGadgetViewModel> {
-        (activity?.application as MyApplication).viewModelFactory
-    }
+    private val viewModel by viewModel<DetailGadgetViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

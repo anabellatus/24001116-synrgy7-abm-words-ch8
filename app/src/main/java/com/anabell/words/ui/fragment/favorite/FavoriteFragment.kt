@@ -8,21 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import com.anabell.words.MyApplication
-import com.anabell.words.domain.model.Gadget
 import com.anabell.words.databinding.FragmentFavoriteBinding
+import com.anabell.words.domain.model.Gadget
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapter
 import com.anabell.words.ui.gadgetrecycler.GadgetAdapterListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment(), GadgetAdapterListener {
 
     private lateinit var viewBinding: FragmentFavoriteBinding
-    private val viewModel by viewModels<FavoriteViewModel> {
-        (activity?.application as MyApplication).viewModelFactory
-    }
+    private val viewModel: FavoriteViewModel by viewModel()
     private val gadgetAdapter by lazy { GadgetAdapter(this) }
 
     override fun onCreateView(

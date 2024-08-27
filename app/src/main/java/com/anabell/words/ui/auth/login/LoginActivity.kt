@@ -4,13 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.ActivityLoginBinding
 import com.anabell.words.ui.MainActivity
 import com.anabell.words.ui.auth.register.RegisterActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,9 +17,7 @@ class LoginActivity : AppCompatActivity() {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: LoginViewModel by viewModels<LoginViewModel> {
-        (application as MyApplication).viewModelFactory
-    }
+    private val viewModel by viewModel<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

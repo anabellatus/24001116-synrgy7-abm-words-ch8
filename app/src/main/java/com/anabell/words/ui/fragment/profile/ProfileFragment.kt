@@ -6,21 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.anabell.words.MyApplication
 import com.anabell.words.R
 import com.anabell.words.databinding.FragmentProfileBinding
 import com.anabell.words.ui.auth.AuthCheckerActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentProfileBinding
 
-    private val viewModel: ProfileViewModel by viewModels<ProfileViewModel>() {
-        (activity?.application as MyApplication).viewModelFactory
-    }
+    private val viewModel by viewModel<ProfileViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

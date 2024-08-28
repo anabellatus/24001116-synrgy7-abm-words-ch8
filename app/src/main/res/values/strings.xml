@@ -20,4 +20,5 @@
     <string name="email_value">binarian@example.com</string>
     <string name="logout">Logout</string>
     <string name="don_t_have_an_account">don\'t have an account?</string>
+    <string name="blur">Blur Image</string>
 </resources>

@@ -28,7 +28,7 @@
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:contentDescription="@string/profile_image"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:backgroundTint="@android:color/transparent"
         android:src="@drawable/user_edit"
         android:layout_marginBottom="16dp"
@@ -55,13 +55,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/logout_button"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancel_button"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingStart="16dp"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/teal_700"
         android:paddingEnd="16dp"
         android:text="@string/blur"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancel_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/logout_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/blur_button"
+        android:paddingStart="16dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/teal_700"
+        android:paddingEnd="16dp"
+        android:text="@string/cancel_blur"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logout_button"
@@ -75,5 +88,18 @@
         android:backgroundTint="@color/black"
         android:paddingEnd="16dp"
         android:text="@string/logout"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

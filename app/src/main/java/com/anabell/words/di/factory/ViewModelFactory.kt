@@ -45,9 +45,10 @@ class ViewModelFactory(private val module: Module) : ViewModelProvider.Factory {
                 gadgetRepository = module.gadgetRepository,
             ) as T
 
-            ProfileViewModel::class.java -> ProfileViewModel(
-                authRepository = module.authRepository,
-            ) as T
+//            ProfileViewModel::class.java -> ProfileViewModel(
+//                authRepository = module.authRepository,
+//
+//            ) as T
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

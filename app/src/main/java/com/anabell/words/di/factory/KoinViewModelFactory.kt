@@ -26,5 +26,5 @@ val viewModelModule = module {
 
     viewModel { ListViewModel(gadgetRepository = get()) }
 
-    viewModel { ProfileViewModel(authRepository = get()) }
+    viewModel { ProfileViewModel(authRepository = get(), get()) }
 }

@@ -21,6 +21,7 @@
     <string name="logout">Logout</string>
     <string name="don_t_have_an_account">don\'t have an account?</string>
     <string name="blur">Blur Image</string>
+    <string name="cancel_blur">Cancel Blur</string>
     <string name="profile_image">profile image</string>
     <string name="pilih_gambar">Pilih Gambar</string>
     <string name="kamera">Kamera</string>

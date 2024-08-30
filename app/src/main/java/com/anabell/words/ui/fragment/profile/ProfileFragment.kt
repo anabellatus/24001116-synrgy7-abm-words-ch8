@@ -3,30 +3,39 @@ package com.anabell.words.ui.fragment.profile
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.work.WorkInfo
 import coil.load
 import com.anabell.words.R
 import com.anabell.words.databinding.FragmentProfileBinding
 import com.anabell.words.ui.auth.AuthCheckerActivity
+import com.nareshchocha.filepickerlibrary.models.PickMediaConfig
+import com.nareshchocha.filepickerlibrary.models.PickMediaType
+import com.nareshchocha.filepickerlibrary.ui.FilePicker
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.File
 
 class ProfileFragment : Fragment() {
+
+    companion object {
+        const val KEY_IMAGE_URI = "KEY_IMAGE_URI"
+    }
 
     private lateinit var uri: Uri
     private lateinit var viewBinding: FragmentProfileBinding
@@ -48,6 +57,12 @@ class ProfileFragment : Fragment() {
         ::handleCameraResult
     )
 
+    private val filePickerResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ::handleFilePickerResult,
+        )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -61,12 +76,18 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.editProfile.setOnClickListener {
-            if (isReadExternalStoragePermissionGranted() && isCameraPermissionGranted() && isWriteExternalStoragePermissionGranted()) {
-                chooseImageDialog()
-            } else {
-                requestPermission()
-            }
+            chooseImageDialog()
         }
+
+        viewBinding.blurButton.setOnClickListener {
+            viewModel.applyBlur()
+        }
+
+        viewBinding.cancelButton.setOnClickListener {
+            viewModel.cancelWork()
+        }
+
+        viewModel.outputWorkInfos.observe(viewLifecycleOwner, workInfosObserver())
 
         viewBinding.logoutButton.setOnClickListener {
             logout()
@@ -88,13 +109,52 @@ class ProfileFragment : Fragment() {
 
     }
 
+    private fun workInfosObserver(): Observer<List<WorkInfo>> {
+        return Observer { listOfWorkInfo ->
+
+            if (listOfWorkInfo.isNullOrEmpty()) {
+                return@Observer
+            }
+
+            val workInfo = listOfWorkInfo[0]
+
+            if (workInfo.state.isFinished) {
+                showWorkFinished()
+
+                val outputImageUri = workInfo.outputData.getString(KEY_IMAGE_URI)
+
+                if (!outputImageUri.isNullOrEmpty()) {
+                    viewModel.setOutputUri(outputImageUri)
+                    viewBinding.editProfile.load(outputImageUri)
+                }
+            } else {
+                showWorkInProgress()
+            }
+        }
+    }
+
+    private fun showWorkFinished() {
+        with(viewBinding) {
+            progressBar.visibility = View.GONE
+            cancelButton.visibility = View.GONE
+            blurButton.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showWorkInProgress() {
+        with(viewBinding) {
+            progressBar.visibility = View.VISIBLE
+            cancelButton.visibility = View.VISIBLE
+            blurButton.visibility = View.GONE
+        }
+    }
+
     private fun handlePermissionResult(permissionResult: Map<String, Boolean>) {
-        if (permissionResult.values.all { it }) {
-            Toast.makeText(requireContext(), "Permission diterima", Toast.LENGTH_SHORT).show()
-//            chooseImageDialog()
-        } else {
-            Toast.makeText(requireContext(), "Permission ditolak", Toast.LENGTH_SHORT).show()
+        if (permissionResult.containsValue(false)) {
+            Toast.makeText(requireContext(), "permission ditolak", Toast.LENGTH_SHORT).show()
             activity?.onBackPressed()
+        } else {
+            Toast.makeText(requireContext(), "permission diterima", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -105,6 +165,17 @@ class ProfileFragment : Fragment() {
     private fun handleCameraResult(result: Boolean) {
         if (result) {
             viewBinding.editProfile.load(uri)
+        }
+    }
+
+    private fun handleFilePickerResult(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let {
+                viewBinding.editProfile.load(it)
+                viewModel.setImageUri(it)
+            }
+        } else {
+            Log.d("ProfileFragment", "File Picker cancelled or failed")
         }
     }
 
@@ -164,31 +235,29 @@ class ProfileFragment : Fragment() {
             .setItems(arrayOf(getString(R.string.kamera), getString(R.string.galeri))) { _, which ->
                 when (which) {
                     0 -> openCamera()
-                    1 -> openGallery()
+                    1 -> openFilePicker()
                 }
             }
             .show()
     }
 
-
-    private fun openGallery() {
-        activity?.intent?.type = "image/*"
-        galleryResult.launch("image/*")
+    private fun openFilePicker() {
+        filePickerResult.launch(
+            FilePicker.Builder(requireContext())
+                .pickMediaBuild(
+                    PickMediaConfig(
+                        mPickMediaType = PickMediaType.ImageOnly,
+                        allowMultiple = true
+                    )
+                )
+        )
     }
 
     private fun openCamera() {
-        val photoFile = File.createTempFile(
-            "Words_",
-            ".jpg",
-            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        filePickerResult.launch(
+            FilePicker.Builder(requireContext())
+                .imageCaptureBuild()
         )
-        uri = FileProvider.getUriForFile(
-            requireContext(),
-            "${requireContext().packageName}.provider",
-            photoFile
-        )
-        cameraResult.launch(uri)
     }
-
 
 }

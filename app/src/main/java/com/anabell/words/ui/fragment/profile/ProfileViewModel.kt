@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val authRepository: AuthRepository,
-    application: Application
+    application: Application,
 ) : ViewModel() {
 
     companion object {
@@ -35,10 +35,6 @@ class ProfileViewModel(
 
     private var imageUri: Uri? = null
     internal var outputUri: Uri? = null
-
-    init {
-        imageUri = getImageUri(application.applicationContext)
-    }
 
     private val workManager = WorkManager.getInstance(application)
     internal val outputWorkInfos: LiveData<List<WorkInfo>> =
@@ -49,6 +45,10 @@ class ProfileViewModel(
 
     private val _userEmail = MutableLiveData<String>()
     val userEmail: LiveData<String> = _userEmail
+
+    init {
+        imageUri = getImageUri(application.applicationContext)
+    }
 
     internal fun cancelWork() {
         workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
@@ -70,9 +70,11 @@ class ProfileViewModel(
                 OneTimeWorkRequest.from(CleanupWorker::class.java)
             )
 
-            val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+        val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
-            continuation = continuation.then(blurBuilder.build())
+        blurBuilder.setInputData(createInputDataForUri())
+
+        continuation = continuation.then(blurBuilder.build())
 
         val constraints = Constraints.Builder()
             .setRequiresCharging(true)

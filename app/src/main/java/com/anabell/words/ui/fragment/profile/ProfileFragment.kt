@@ -76,7 +76,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewBinding.editProfile.setOnClickListener {
-            chooseImageDialog()
+//            chooseImageDialog()
+            openCamera()
         }
 
         viewBinding.blurButton.setOnClickListener {

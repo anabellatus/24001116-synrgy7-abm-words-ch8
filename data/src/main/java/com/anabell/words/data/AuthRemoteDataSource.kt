@@ -1,3 +1,5 @@
+@file:Suppress("SameReturnValue", "SameReturnValue")
+
 package com.anabell.words.data
 
 interface AuthRemoteDataSource {

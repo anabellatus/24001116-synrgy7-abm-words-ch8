@@ -26,4 +26,10 @@
     <string name="pilih_gambar">Pilih Gambar</string>
     <string name="kamera">Kamera</string>
     <string name="galeri">Galeri</string>
+    <string name="add_favorite_success">Berhasil ditambahkan ke favorit</string>
+    <string name="delete_favorite_success">Berhasil dihapus dari favorit</string>
+    <string name="login_berhasil">Login Berhasil</string>
+    <string name="permission_denied">permission ditolak</string>
+    <string name="permission_accepted">permission diterima</string>
+    <string name="register_berhasil">Register Berhasil</string>
 </resources>

@@ -15,7 +15,7 @@ import java.util.Locale
 
 class SaveImageToFileWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params) {
 
-    private val Title = "Blurred Image"
+    private val title = "Blurred Image"
     private val dateFormatter = SimpleDateFormat(
             "yyyy.MM.dd 'at' HH:mm:ss z",
             Locale.getDefault()
@@ -31,7 +31,7 @@ class SaveImageToFileWorker(ctx: Context, params: WorkerParameters) : Worker(ctx
             val bitmap = BitmapFactory.decodeStream(
                     resolver.openInputStream(Uri.parse(resourceUri)))
             val imageUrl = MediaStore.Images.Media.insertImage(
-                    resolver, bitmap, Title, dateFormatter.format(Date()))
+                    resolver, bitmap, title, dateFormatter.format(Date()))
             if (!imageUrl.isNullOrEmpty()) {
                 val output = workDataOf(KEY_IMAGE_URI to imageUrl)
 

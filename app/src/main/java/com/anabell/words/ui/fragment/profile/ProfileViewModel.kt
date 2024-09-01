@@ -34,7 +34,7 @@ class ProfileViewModel(
     }
 
     private var imageUri: Uri? = null
-    internal var outputUri: Uri? = null
+    private var outputUri: Uri? = null
 
     private val workManager = WorkManager.getInstance(application)
     internal val outputWorkInfos: LiveData<List<WorkInfo>> =

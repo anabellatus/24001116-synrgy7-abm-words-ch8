@@ -62,7 +62,7 @@ class DetailGadgetFragment : Fragment() {
 
         viewModel.insertGadget.observe(viewLifecycleOwner) { insert ->
             if (insert) {
-                Toast.makeText(context, "Berhasil ditambahkan ke favorit", Toast.LENGTH_SHORT)
+                Toast.makeText(context, getString(R.string.add_favorite_success), Toast.LENGTH_SHORT)
                     .show()
                 viewBinding.favoriteButton.setImageResource(R.drawable.favorite_fill_24)
             }
@@ -70,7 +70,8 @@ class DetailGadgetFragment : Fragment() {
 
         viewModel.deleteGadget.observe(viewLifecycleOwner) { delete ->
             if (delete) {
-                Toast.makeText(context, "Berhasil dihapus dari favorit", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,
+                    getString(R.string.delete_favorite_success), Toast.LENGTH_SHORT).show()
                 viewBinding.favoriteButton.setImageResource(R.drawable.favorite_border_24)
             }
         }

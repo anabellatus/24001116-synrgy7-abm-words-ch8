@@ -113,6 +113,7 @@ class ProfileFragment : Fragment() {
     private fun workInfosObserver(): Observer<List<WorkInfo>> {
         return Observer { listOfWorkInfo ->
 
+            @Suppress("UselessCallOnNotNull")
             if (listOfWorkInfo.isNullOrEmpty()) {
                 return@Observer
             }
@@ -152,10 +153,12 @@ class ProfileFragment : Fragment() {
 
     private fun handlePermissionResult(permissionResult: Map<String, Boolean>) {
         if (permissionResult.containsValue(false)) {
-            Toast.makeText(requireContext(), "permission ditolak", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.permission_denied), Toast.LENGTH_SHORT).show()
             activity?.onBackPressed()
         } else {
-            Toast.makeText(requireContext(), "permission diterima", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.permission_accepted), Toast.LENGTH_SHORT).show()
         }
     }
 

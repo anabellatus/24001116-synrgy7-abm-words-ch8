@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.anabell.words.data.datasource.remote
 
 import androidx.datastore.core.DataStore
@@ -11,6 +13,7 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
+@Suppress("SpellCheckingInspection")
 class AuthLocalDataSourceImplTest {
 
     //given

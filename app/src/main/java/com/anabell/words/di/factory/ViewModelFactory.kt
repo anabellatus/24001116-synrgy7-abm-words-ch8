@@ -10,7 +10,6 @@ import com.anabell.words.ui.fragment.detail.DetailViewModel
 import com.anabell.words.ui.fragment.detailgadget.DetailGadgetViewModel
 import com.anabell.words.ui.fragment.favorite.FavoriteViewModel
 import com.anabell.words.ui.fragment.list.ListViewModel
-import com.anabell.words.ui.fragment.profile.ProfileViewModel
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(private val module: Module) : ViewModelProvider.Factory {

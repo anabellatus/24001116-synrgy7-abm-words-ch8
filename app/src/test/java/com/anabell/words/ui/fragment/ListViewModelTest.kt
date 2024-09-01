@@ -4,9 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.anabell.words.MainDispatcherRule
 import com.anabell.words.domain.model.CategoryGadget
-import com.anabell.words.domain.model.Gadget
 import com.anabell.words.domain.repository.GadgetRepository
-import com.anabell.words.ui.fragment.detail.DetailViewModel
 import com.anabell.words.ui.fragment.list.ListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

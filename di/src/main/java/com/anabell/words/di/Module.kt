@@ -63,7 +63,7 @@ class Module(context: Context) {
     }
 
     private val gadgetService: GadgetService by lazy {
-        provideGadgetService()
+        provideGadgetService(context)
     }
 
     private val authLocalDataSource: AuthLocalDataSource by lazy {

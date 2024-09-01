@@ -21,12 +21,37 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            isDebuggable = true
+            applicationIdSuffix = ".dev"
+        }
+        create("staging") {
+            isMinifyEnabled = false
+            isDebuggable = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            applicationIdSuffix = ".stg"
+        }
+        release {
+            isMinifyEnabled = true
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    flavorDimensions += "mode"
+    productFlavors {
+        create("basic") {
+            dimension = "mode"
+            applicationIdSuffix = ".basic"
+        }
+        create("student") {
+            dimension = "mode"
         }
     }
     compileOptions {
@@ -38,6 +63,10 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
+    }
+    lint {
+        baseline = file("lint.xml")
     }
 }
 
@@ -83,6 +112,9 @@ dependencies {
     implementation(libs.filepicker)
 
     implementation(libs.androidx.work.runtime.ktx)
+
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
 
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.inline)

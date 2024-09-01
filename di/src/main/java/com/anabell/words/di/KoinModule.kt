@@ -36,7 +36,7 @@ val koinModule = module {
 
     single<GadgetRemoteDataSource> { GadgetRemoteDataSourceImpl(gadgetService = get()) }
 
-    single<GadgetService> { provideGadgetService() }
+    single<GadgetService> { provideGadgetService(context = get()) }
 
     single<AuthLocalDataSource> { AuthLocalDataSourceImpl(dataStore = get()) }
 

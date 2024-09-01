@@ -16,12 +16,22 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL_GADGET", "\"https://my-json-server.typicode.com/anabellatus/db/\"")
+        }
+        create("staging") {
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL_GADGET", "\"https://my-json-server.typicode.com/anabellatus/db/\"")
+        }
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL_GADGET", "\"https://my-json-server.typicode.com/anabellatus/db/\"")
         }
     }
     compileOptions {
@@ -30,6 +40,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    buildFeatures{
+        buildConfig = true
     }
 }
 
@@ -51,6 +64,9 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
 
     implementation(libs.androidx.work.runtime.ktx)
+
+    debugImplementation(libs.chucker)
+    releaseImplementation(libs.chucker.no.op)
 
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.junit)

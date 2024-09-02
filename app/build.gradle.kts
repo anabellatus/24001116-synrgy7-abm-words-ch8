@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -90,7 +91,6 @@ dependencies {
     implementation(libs.androidx.annotation)
 
     implementation(libs.androidx.lifecycle.livedata.ktx)
-
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     implementation(libs.androidx.datastore.preferences)
@@ -102,7 +102,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.gson)
-
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
 
@@ -123,5 +122,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
 
 }

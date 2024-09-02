@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_number": "205123348592",
+    "project_id": "synrgy-e0596",
+    "storage_bucket": "synrgy-e0596.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:925702687c4ff468bbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:93bf9c80d2e626ebbbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words.basic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:7a2d4a527688f02fbbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words.basic.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:8eb6d441c581d943bbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words.basic.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:fbfd76028a343e84bbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205123348592:android:24226aa080bc3e4cbbecb5",
+        "android_client_info": {
+          "package_name": "com.anabell.words.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxx1gBmnfvElXFNltp9Mb54BFeMJIRHZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

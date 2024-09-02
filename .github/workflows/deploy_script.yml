@@ -40,8 +40,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
-      - name: Run Build App
+      - name: Run Build App (Debug)
         run: ./gradlew assembleBasicDebug
+
+      - name: Run Build App (Release)
+        run: ./gradlew assembleBasicRelease
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -50,3 +53,11 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
           groups: tester
           file: app/build/outputs/apk/basic/debug/app-basic-debug.apk
+
+      - name: Upload Release Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+          groups: tester
+          file: app/build/outputs/apk/basic/release/app-basic-release.apk

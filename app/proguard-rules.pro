@@ -12,6 +12,9 @@
 #   public *;
 #}
 
+# Keep the StringConcatFactory class
+-dontwarn java.lang.invoke.StringConcatFactory
+
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable

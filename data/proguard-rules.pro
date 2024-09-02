@@ -12,6 +12,29 @@
 #   public *;
 #}
 
+# Keep the data classes
+-keep class com.anabell.words.data.** { *; }
+
+# Keep the local data source implementations
+-keep class com.anabell.words.data.datasource.local.** { *; }
+
+# Keep the remote data source implementations
+-keep class com.anabell.words.data.datasource.remote.** { *; }
+
+# Keep the repository implementations
+-keep class com.anabell.words.data.repository.** { *; }
+
+# Keep the Room database and DAO classes
+-keep class com.anabell.words.data.datasource.local.room.** { *; }
+
+# Keep the Retrofit service and factory classes
+-keep class com.anabell.words.data.datasource.remote.retrofit.** { *; }
+
+# Keep the DataStore factory classes
+-keep class com.anabell.words.data.datasource.local.DataStoreFactoryKt { *; }
+
+-dontwarn java.lang.invoke.StringConcatFactory
+
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
